@@ -1,0 +1,20 @@
+version: '2'
+services:
+  data:
+    image: busybox
+    volumes:
+      - /var/lib/mysql
+  mysql:
+    build: Dockerfiles/mysql/.
+    container_name: docker-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: foo
+      MYSQL_USER: bar
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes_from:
+      - data
+    volumes:
+      - ./misc/data:/root/data
